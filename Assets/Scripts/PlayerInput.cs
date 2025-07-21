@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InputType
-{
-    KeyboardInput
-}
+
 public class PlayerInput : MonoBehaviour
 {
-   public InputType inputType = InputType.KeyboardInput;
 
     void Update()
     {
-        if (inputType == InputType.KeyboardInput)
-        {
+       
             KeyboardInput();
-        }
+            TouchInput();
+        
     }
 
     public void KeyboardInput()
@@ -27,6 +23,24 @@ public class PlayerInput : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             GameManager.Instance.blueCar.ChangeLane();
+        }
+    }
+
+    public void TouchInput()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Ended)
+            {
+                if (touch.position.x < Screen.width / 2)
+                {
+                    GameManager.Instance.redCar.ChangeLane();
+                }
+                else
+                {
+                    GameManager.Instance.blueCar.ChangeLane();
+                }
+            }
         }
     }
 }
