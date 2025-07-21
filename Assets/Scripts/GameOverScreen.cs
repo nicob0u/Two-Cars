@@ -19,9 +19,9 @@ public class GameOverScreen : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
-    public void ExitButton()
+    public void MainMenuButton()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
